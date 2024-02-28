@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="/vite.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Koiratarha</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" rel="stylesheet">
+    <link href="../../appStyle.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com/%22%3E">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&family=Raleway&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="../../src/mapFunctions/map.ts" type="module"></script>
+</head>
+<body id="body" class="bigger-text">
+    <div class="container-fluid">
+        <div class="row justify-content-center text-center">
+            <h1 id="header">Koiratarha</h1>
+            <nav id="nav">
+                <ul id="navBg" class="list-group list-group-horizontal">
+                    <li id="navContentPage" class="list-group-item bigger-text"><a id="navContent" href="../../pages/dogPark/index.html">Kartat<br>
+                        <img class="icon" src="../../images/img/kartat50.png" width="50" height="50" alt="Kartta-ikoni"></a></li>
+                    <li id="navContentPageUser" class="list-group-item bigger-text"><a id="navContent" href="../../pages/editAcc/index.html">Muokkaa tietoja<br>
+                        <img class="icon" src="../../images/img/muokkaa50.png" width="50" height="50" alt="Muokkaus-ikoni"></a></li>
+                    <li id="navContentPageLogout" class="list-group-item bigger-text"><a id="navContent" href="../../index.html">Kirjaudu ulos<br>
+                        <img class="icon" src="../../images/img/ulos50.png" width="50" height="50" alt="Uloskirjautumis-ikoni"></a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div class="mapAndTexts">
+        <div id="textsOfPage" class="align-items-center justify-content-center">
+            <div id="radioGroupGroup">
+                <p>Näytä kartalla:</p>
+                <div id="radioGroup">
+                    <div>
+                        <input type="radio" id="placeChoice1"
+                                name="place" value="enclosure">
+                        <label for="placeChoice1">Aitaukset</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="placeChoice2"
+                                name="place" value="trail">
+                        <label for="placeChoice2">Hiihtoladut</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="placeChoice3"
+                                name="place" value="toilet">
+                        <label for="placeChoice3">Käymälät</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="placeChoice4"
+                                name="place" value="forest">
+                        <label for="placeChoice4">Metsät</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="placeChoice5"
+                                name="place" value="beach">
+                        <label for="placeChoice5">Uimarannat</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="placeChoice6"
+                                name="place" value="all">
+                        <label for="placeChoice6">Kaikki</label>
+                    </div>
+                </div>
+                <div class="center">
+                    <button id="submitBtn">Valitse</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="map"></div>
+    </div>
+
+    <div class="mapAndTexts">
+        <div id="placeInfoGroup">
+            <div id="placeInfo" class="row justify-content-center text-center p-2">
+                <div class="col-sm-6">
+                  <p>Sijaintitiedot:</p>
+                  <p id="name"></p>
+                  <p id="address"></p>
+                  <p id="city"></p>
+                </div>
+                <div class="center p-2">
+                  <button id="faveBtn">Lisää suosikkeihin</button>
+                  <button id="removeFaveBtn">Poista suosikeista</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="favourites">
+          <div id="placeInfo" class="row justify-content-center text-center p-2">
+              <div class="col-sm-6 flex-grow-1">
+                <p>Suosikkipaikat</p>
+                <form method='post' name='form'>
+                  <ul id="favList">
+                  </ul>
+                </form>
+              </div>
+          </div>
+        </div>
+     </div>
+
+      <div class="mapAndTexts">
+        <div id="notifications" class="row justify-content-center text-center p-2">
+          <div class="col-sm-6">
+            <p>Muistutukset:</p>
+            <table id="notificationsAll" class="p-2">
+              <div id="place1" class="col-sm-2"></div>
+              <div id="place2" class="col-sm-2"></div>
+            </table>
+          </div>
+          <div class="center" id="timeForm">
+            <input type="datetime-local" id="time" placeholder="Ajankohta">
+          </div>
+          <div class="center p-2">
+            <button id="addNotification">Lisää muistutus</button>
+            <button id="removeNotification">Poista muistutus</button>
+          </div>
+        </div>
+    </div>
+
+    <footer class="text-center fixed-footer">
+        <div class="container">
+            <div class="col">
+                <a href="../../pages/dogPark/index.html"><img class="icon" src="../../images/img/kartat50.png" width="50" height="50" alt="Kartta-ikoni"></a>
+                <a href="../../pages/editAcc/index.html"><img class="icon" src="../../images/img/muokkaa50.png" width="50" height="50" alt="Muokkaus-ikoni"></a>
+                <p>Web-sovelluskehitys 2 TX00DZ38-3006<br>Metropolia Ammattikorkeakoulu<br>2023</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="/src/logout.ts"></script>
+    <script type="module" src="/pages/dogPark/dogPark.ts"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+    <script type="module" src="../../src/mapFunctions/Polyline.encoded.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>
