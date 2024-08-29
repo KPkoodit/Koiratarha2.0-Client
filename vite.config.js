@@ -15,7 +15,6 @@ export default {
         accCreation: resolve(__dirname, 'pages/accCreation/index.html'),
         dogPark: resolve(__dirname, 'pages/dogPark/index.html'),
         editAcc: resolve(__dirname, 'pages/editAcc/index.html'),
-        editAccAdmin: resolve(__dirname, 'pages/editAccAdmin/index.html'),
         gallery: resolve(__dirname, 'pages/gallery/index.html'),
         login: resolve(__dirname, 'pages/login/index.html'),
         // uploadPic: resolve(__dirname, 'pages/uploadPic/index.html')
