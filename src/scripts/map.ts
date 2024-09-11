@@ -114,7 +114,14 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function addMarker(crd: Coordinates, text: string): L.Marker {
-  const m = L.marker([crd.latitude, crd.longitude])
+  const customIcon = L.icon({
+    iconUrl: "/images/target50.png",
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32]
+  })
+
+  const m = L.marker([crd.latitude, crd.longitude], {icon: customIcon})
     .addTo(markerGroup)
     .bindPopup(text);
   markerGroup.addLayer(m);

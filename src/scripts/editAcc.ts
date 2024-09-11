@@ -1,9 +1,9 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import {doGraphQLFetch} from "../../src/graphql/fetch";
-import {deleteUser, updateUser, userById} from "../../src/graphql/queries";
-import ModifyMessageResponse from "../../src/interfaces/ModifyMessageResponse";
-import DeleteMessageResponse from "../../src/interfaces/DeleteMessageResponse";
-import { User } from "../../src/interfaces/User";
+import {doGraphQLFetch} from "../graphql/fetch";
+import {deleteUser, updateUser, userById} from "../graphql/queries";
+import ModifyMessageResponse from "../interfaces/ModifyMessageResponse";
+import DeleteMessageResponse from "../interfaces/DeleteMessageResponse";
+//import { User } from "../interfaces/User";
 
 const apiURL = import.meta.env.VITE_API_URL;
 const token = localStorage.getItem('token');
@@ -60,9 +60,9 @@ deleteButton.addEventListener("click", async () => {
 
   console.log(deleteData);
 
-  /*if (deleteData) {
+  if (deleteData) {
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
     window.location.href = "/";
-  }**/
+  }
 });

@@ -12,51 +12,28 @@
 }
 /* end of headers */
 
-/* nav bar before logging in */
-#nav {
+/* nav bar */
+.nav {
   background: #CB997E;
+  display: flex;
+  justify-content: center;
 }
 
-#navBg {
+.navBg {
   background: #CB997E;
   list-style-type: none;
   border: 3px solid #CB997E;
-  justify-content: center;
-  border-radius: 5px;
 }
 
-#navContentBg {
-  background: #B7B7A4;
-  border: 3px solid #F0EFEB;
-}
-
-#navContentBg:nth-child(1) {
-  border-right: none;
-}
-
-#navContentBg:hover {
-  background: #A5A58D;
-}
-/* all common nav bar elements are above this comment */
-/* nav bar when logged in*/
-#navContentPage, #navContentPageUser, #navContentPageLogout {
-    background: #B7B7A4;
-    border: 3px solid #F0EFEB;
-}
-
-#navContentPage:hover, #navContentPageUser:hover, #navContentPageLogout:hover {
-  background: #A5A58D;
-}
-
-#navContentPage, #navContentPageUser {
-  border-right: none;
-}
-
-#navContent {
+.navContent {
     color: black;
     display: block;
     padding: 10px 15px;
     text-decoration: none;
+}
+
+.navContent:hover {
+  color: black;
 }
 /* end of nav bar */
 
@@ -131,6 +108,22 @@ button:hover {
 }
 /* end of user content */
 
+/* override bootstrap classes */
+.container-fluid .nav .list-group .list-group-item {
+  position: relative;
+  display: block;
+  padding: 0;
+  margin: 0 1px 0 1px;
+  background-color: #B7B7A4;;
+  border: 3px solid #F0EFEB;
+  border-radius: 0px;
+}
+
+.container-fluid .nav .list-group .list-group-item:hover {
+  background-color: #A5A58D;
+}
+/* end of bootstrap classes */
+
 /* utility classes */
 .center {
   display: flex;
@@ -159,7 +152,6 @@ button:hover {
 #link a:hover {
     background: #DDBEA9;
     padding: 5px;
-    border-radius: 5px;
 }
 /* end of links */
 
@@ -203,14 +195,6 @@ table td {
   text-align: center;
 }
 
-ul {
-  padding-left: 0;
-}
-
-li {
-  list-style-type: none;
-}
-
 #favList {
   max-height: 300px;
   overflow-x: auto;
@@ -230,49 +214,7 @@ li {
   margin: 20px;
   border-radius: 20px;
 }
-
-#routeColours {
-  padding: 0 40px 20px 40px;
-}
 /* end of map */
-
-/* spans for the route colours */
-span.green {
-  background: #FFF1E6;
-  color: seagreen;
-  padding: 5px;
-  border-radius: 5px;
-}
-
-span.purple {
-  background: #FFF1E6;
-  color: mediumpurple;
-  padding: 5px;
-  border-radius: 5px;
-}
-
-span.blue {
-  background: #FFF1E6;
-  color: deepskyblue;
-  padding: 5px;
-  border-radius: 5px;
-}
-
-span.pink {
-  background: #FFF1E6;
-  color: hotpink;
-  padding: 5px;
-  border-radius: 5px;
-}
-
-span.coral {
-  background: #FFF1E6;
-  color: coral;
-  padding: 5px;
-  border-radius: 5px;
-}
-/* end of spans */
-
 
 @media (max-width: 900px) {
   #userContent {

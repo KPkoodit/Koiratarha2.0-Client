@@ -1,8 +1,8 @@
-import { doGraphQLFetch } from "../../src/graphql/fetch"
-import { createUser, login, userByUsername } from "../../src/graphql/queries"
-import LoginMessageResponse from "../../src/interfaces/LoginMessageResponse";
-import RegisterMessageResponse from "../../src/interfaces/RegisterMessageResponse"
-import { UserQuery } from "../../src/interfaces/User";
+import { doGraphQLFetch } from "../graphql/fetch"
+import { createUser, login, userByUsername } from "../graphql/queries"
+import LoginMessageResponse from "../interfaces/LoginMessageResponse";
+import RegisterMessageResponse from "../interfaces/RegisterMessageResponse"
+import { UserQuery } from "../interfaces/User";
 
 const apiURL = import.meta.env.VITE_API_URL;
 
@@ -43,8 +43,8 @@ registerButton.addEventListener("click", async (e) => {
 
       // setting the login data of a user into local storage and redirecting the user to the main page
       localStorage.setItem("token", loginData.login.token!);
-      localStorage.setItem("userId", loginData.login.user.id!)
-      window.location.href = '../../pages/dogPark/index.html';
+      localStorage.setItem("userId", loginData.login.user.id!);
+      window.location.href = '/src/pages/dogPark.html';
     } else {
       // asks user to select another username in case the username is already in use
       const regInfo = document.querySelector("#regInfo") as HTMLElement;

@@ -12,10 +12,10 @@ export default {
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
-        accCreation: resolve(__dirname, 'pages/accCreation/index.html'),
-        dogPark: resolve(__dirname, 'pages/dogPark/index.html'),
-        editAcc: resolve(__dirname, 'pages/editAcc/index.html'),
-        login: resolve(__dirname, 'pages/login/index.html'),
+        accCreation: resolve(__dirname, 'src/pages/accCreation.html'),
+        dogPark: resolve(__dirname, 'src/pages/dogPark.html'),
+        editAcc: resolve(__dirname, 'src/pages/editAcc.html'),
+        login: resolve(__dirname, 'src/pages/login.html'),
       }
     }
   }

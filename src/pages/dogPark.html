@@ -2,33 +2,42 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" type="image/svg+xml" href="/vite.svg">
+    <link rel="icon" type="image/svg+xml" href="/images/vite.svg">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Koiratarha</title>
+    <script type="module" src="/src/scripts/logout.ts"></script>
+    <script type="module" src="/src/scripts/dogPark.ts"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" rel="stylesheet">
-    <link href="../../appStyle.css" rel="stylesheet">
+    <link href="/styles/appStyle.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com/%22%3E">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&family=Raleway&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="../../src/mapFunctions/map.ts" type="module"></script>
+    <script src="/src/scripts/map.ts" type="module"></script>
 </head>
 <body id="body" class="bigger-text">
     <div class="container-fluid">
-        <div class="row justify-content-center text-center">
-            <h1 id="header">Koiratarha</h1>
-            <nav id="nav">
-                <ul id="navBg" class="list-group list-group-horizontal">
-                    <li id="navContentPage" class="list-group-item bigger-text"><a id="navContent" href="../../pages/dogPark/index.html">Kartat<br>
-                        <img class="icon" src="../../images/img/kartat50.png" width="50" height="50" alt="Kartta-ikoni"></a></li>
-                    <li id="navContentPageUser" class="list-group-item bigger-text"><a id="navContent" href="../../pages/editAcc/index.html">Muokkaa tietoja<br>
-                        <img class="icon" src="../../images/img/muokkaa50.png" width="50" height="50" alt="Muokkaus-ikoni"></a></li>
-                    <li id="navContentPageLogout" class="list-group-item bigger-text"><a id="navContent" href="../../index.html">Kirjaudu ulos<br>
-                        <img class="icon" src="../../images/img/ulos50.png" width="50" height="50" alt="Uloskirjautumis-ikoni"></a></li>
-                </ul>
-            </nav>
-        </div>
+        <h1 id="header">Koiratarha</h1>
+        <nav class="nav">
+          <ul class="list-group list-group-horizontal navBg">
+              <li class="list-group-item">
+                <a id="navContentPage" class="navContent" href="/src/pages/dogPark.html">Kartat<br>
+                  <img class="icon" src="/images/kartat50.png" width="50" height="50" alt="Kartta-ikoni">
+                </a>
+              </li>
+              <li class="list-group-item">
+                <a id="navContentPageUser" class="navContent" href="/src/pages/editAcc.html">Muokkaa tietoja<br>
+                  <img class="icon" src="/images/muokkaa50.png" width="50" height="50" alt="Muokkaus-ikoni">
+                </a>
+              </li>
+              <li class="list-group-item">
+                <a id="navContentPageLogout" class="navContent" href="/">Kirjaudu ulos<br>
+                  <img class="icon" src="/images/ulos50.png" width="50" height="50" alt="Uloskirjautumis-ikoni">
+                </a>
+              </li>
+          </ul>
+        </nav>
     </div>
 
     <div class="mapAndTexts">
@@ -127,17 +136,14 @@
     <footer class="text-center fixed-footer">
         <div class="container">
             <div class="col">
-                <a href="../../pages/dogPark/index.html"><img class="icon" src="../../images/img/kartat50.png" width="50" height="50" alt="Kartta-ikoni"></a>
-                <a href="../../pages/editAcc/index.html"><img class="icon" src="../../images/img/muokkaa50.png" width="50" height="50" alt="Muokkaus-ikoni"></a>
-                <p>Web-sovelluskehitys 2 TX00DZ38-3006<br>Metropolia Ammattikorkeakoulu<br>2023</p>
+              <a href="/dogPark.html"><img class="icon" src="/images/kartat50.png" width="50" height="50" alt="Kartta-ikoni"></a>
+              <a href="/editAcc.html"><img class="icon" src="/images/muokkaa50.png" width="50" height="50" alt="Muokkaus-ikoni"></a>
+                <p>Web-sovelluskehitys 2 TX00DZ38-3006<br>Metropolia Ammattikorkeakoulu<br>2023-2024</p>
             </div>
         </div>
     </footer>
 
-    <script type="module" src="/src/logout.ts"></script>
-    <script type="module" src="/pages/dogPark/dogPark.ts"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
-    <script type="module" src="../../src/mapFunctions/Polyline.encoded.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>

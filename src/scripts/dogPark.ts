@@ -1,6 +1,6 @@
 import "leaflet/dist/leaflet.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { doGraphQLFetch } from "./../../src/graphql/fetch";
+import { doGraphQLFetch } from "../graphql/fetch";
 import {
   addNotification,
   deleteNotification,
@@ -9,7 +9,7 @@ import {
   deleteLocation,
   locationsByUser,
   locationById,
-} from "./../../src/graphql/queries";
+} from "../graphql/queries";
 
 // Global variables
 const apiURL = import.meta.env.VITE_API_URL;
@@ -122,7 +122,7 @@ removeFaveButton!.addEventListener("click", async () => {
 });
 
 // Function to handle clicks on list items
-async function handleItemClick(event) {
+async function handleItemClick(event: any) {
   const clickedItem = event.target.textContent;
   let locationId = "";
 

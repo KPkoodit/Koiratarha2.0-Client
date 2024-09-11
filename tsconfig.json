@@ -16,5 +16,5 @@
     "skipLibCheck": true,
     "types": ["vite/client"]
   },
-  "include": ["./*.js", "src/**/*.ts", "test/**/*.ts", "vite-env.d.ts", "vite.config.js"]
+  "include": ["./*.js", "src/**/*.ts", "test/**/*.ts", "src/vite-env.d.ts", "vite.config.js"]
 }
