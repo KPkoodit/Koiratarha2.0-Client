@@ -22,7 +22,7 @@ const deleteButton = document.querySelector(
 ) as HTMLButtonElement;
 
 modifyButton.addEventListener("click", async () => {
-  const modifyForm = document.querySelector("#userContent") as HTMLFormElement;
+  const modifyForm = document.querySelector("#userForm") as HTMLFormElement;
   const modifyInfo = document.querySelector("#modifyInfo") as HTMLElement;
 
   modifyForm.addEventListener("submit", async (e) => {

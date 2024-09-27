@@ -1,44 +1,56 @@
 /* headers */
 #header {
   font-family: 'Nunito Sans', sans-serif;
-  font-size: 50px;
+  font-size: 2em;
+  color: #333;
   padding: 20px;
   margin: 10px;
 }
 
-#header2 {
+.bold-header {
   font-family: 'Nunito Sans', sans-serif;
-  font-size: 30px;
+  font-weight: bold;
 }
 /* end of headers */
 
 /* nav bar */
 .nav {
-  background: #CB997E;
+  background: #E2E2DF;
   display: flex;
   justify-content: center;
 }
 
 .navBg {
-  background: #CB997E;
+  background: #E2E2DF;
   list-style-type: none;
-  border: 3px solid #CB997E;
+  border: 3px solid #E2E2DF;
 }
 
 .navContent {
-    color: black;
+    color: #333;
     display: block;
-    padding: 10px 15px;
+    background: #D2D2C6;
+    padding: 10px;
     text-decoration: none;
+    border: 2px solid #C0C0AF;
+    margin-right: 1px;
 }
 
 .navContent:hover {
-  color: black;
+    color: #333;
+    background: #C0C0AF;
+}
+
+nav ul {
+  padding: 0;
+  margin: 0;
 }
 /* end of nav bar */
 
 /* body */
-#body {
+#body, html {
+  margin: 0;
+  padding: 0;
   background: #FFF1E6;
   text-align: center;
   font-family: 'Raleway', sans-serif;
@@ -53,76 +65,146 @@
 }
 /* end of footer */
 
+
+/* main page */
+#radioGroupGroup {
+  width: 20%;
+  padding: 20px;
+}
+
+#map {
+  width: 70%;
+  height: 460px;
+  margin: 20px;
+  border-radius: 5px;
+}
+
+#placeInfoGroup, #favourites {
+  width: 50%;
+  min-height: 260px;
+  padding: 0 10px;
+}
+
+#timeForm, #showNotifications {
+  width: 50%;
+  padding: 40px;
+}
+
+#addressInfo {
+  min-height: 200px;
+}
+
+#timeForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.notificationContainer {
+  min-height: 170px;
+}
+
+table td {
+  padding: 10px;
+  border-top: thin solid;
+  border-bottom: thin solid;
+}
+/* end of main page */
+
 /* buttons */
 button {
-  background: #B7B7A4;
-  color: black;
-  display: block;
+  background: #D2D2C6;
+  color: #333;
+  display: inline-block;
   text-decoration: none;
-  padding: 10px;
-  width: fit-content;
-  margin: auto;
+  padding: 10px 20px;
+  width: 180px;
+  cursor: pointer;
   font-family: inherit;
-}
-
-#loginButton, #registerButton, #modifyButton, #deleteButton {
-  background: #B7B7A4;
-  color: black;
-  display: block;
-  text-decoration: none;
-  padding: 10px;
-  margin: auto;
-  width: fit-content;
-  font-family: inherit;
-}
-
-#submitBtn, #navigationBtn {
-  margin: 20px;
-}
-
-#addNotification, #faveBtn {
-  margin-right: 10px;
-}
-
-#removeNotification, #removeFaveBtn {
-  margin-left: 10px;
 }
 
 button:hover {
-  background: #A5A58D;
+  background: #C0C0AF;
+}
+
+.buttonContainer {
+  margin-top: 40px;
+}
+
+.navButton {
+  width: 160px;
+}
+
+.navButtonWide {
+  width: 200px;
 }
 /* end of buttons */
 
+/* lists */
+li {
+  list-style-type: none;
+  cursor: pointer;
+}
+/* end of lists */
+
 /* user content */
-#userContent {
-  width: 35%;
-  background: #CB997E;
-  border-radius: 40px;
-  padding: 50px;
-  margin: auto;
+.userContent {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.userContentWide {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 40px 0;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .user-content-section {
-  margin: 20px;
-  padding: 20px;
+  margin-bottom: 15px;
+}
+
+.user-content-section p {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
 }
 /* end of user content */
 
-/* override bootstrap classes */
-.container-fluid .nav .list-group .list-group-item {
-  position: relative;
-  display: block;
-  padding: 0;
-  margin: 0 1px 0 1px;
-  background-color: #B7B7A4;;
-  border: 3px solid #F0EFEB;
-  border-radius: 0px;
+/* img */
+.icon {
+  margin-left: 10px;
+}
+/* end of img */
+
+/* input forms */
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+/*end of input forms */
+
+/* links */
+.backToFrontpage {
+  color: #333;
+  margin-top: 20px;
 }
 
-.container-fluid .nav .list-group .list-group-item:hover {
-  background-color: #A5A58D;
+.backToFrontpage:hover {
+  color: #333;
 }
-/* end of bootstrap classes */
+
+/* end of links */
 
 /* utility classes */
 .center {
@@ -131,93 +213,111 @@ button:hover {
   align-items: center;
 }
 
+.flexContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+}
+
 .bigger-text {
   font-size: 20px;
 }
 
-.extra-margin {
+.extra-margin-top {
+  margin-top: 20px;
+}
+
+.extra-margin-bottom {
+  margin-bottom: 20px;
+}
+
+.extra-padding-top {
+  padding-top: 20px;
+}
+
+.text-aligned-left {
+  text-align: left;
+}
+
+.border-shadow {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.borderElement {
+  border: 1px solid #333;
   margin-bottom: 20px;
 }
 /* end of utility classes */
 
-/* links */
-#link {
-    margin: 20px 0 0 0;
-}
-
-#link a {
-    color: black;
-}
-
-#link a:hover {
-    background: #DDBEA9;
-    padding: 5px;
-}
-/* end of links */
-
-table td {
-    padding: 10px;
-    border-top: thin solid;
-    border-bottom: thin solid;
-}
-
-#timeForm {
-    padding: 20px
-}
-
-#placeInfo form .col-sm-6 {
-    max-width: 1;
-}
-
-/* main page */
-#textsOfPage, #notifications, #placeInfoGroup, #favourites {
-  display: flex;
-  flex-wrap: wrap;
-  background: #EDDCD2;
-  margin: 20px;
-  border-radius: 20px;
-  min-width: 220px;
-}
-
-.mapAndTexts {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-#radioGroupGroup, #notifications {
-  padding: 20px 40px 0 40px;
-  text-align: left;
-}
-
-#placeInfo {
-  text-align: center;
-}
-
-#favList {
-  max-height: 300px;
-  overflow-x: auto;
-}
-
-#favList li {
-  padding-right: 50px;
-  text-align: left;
-}
-/* end of main page */
-
-/* map */
-#map {
-  min-width: 420px;
-  width: 50%;
-  height: 460px;
-  margin: 20px;
-  border-radius: 20px;
-}
-/* end of map */
-
-@media (max-width: 900px) {
-  #userContent {
-    width: 70%;
+@media (max-width: 880px) {
+  .flexContainer {
+    flex-direction: column;
   }
+
+  .flexContainerRow {
+    flex-direction: row;
+  }
+
+  #radioGroupGroup {
+    width: 50%;
+    padding: 20px;
+  }
+
+  #map {
+    width: 90%;
+    margin: 20px;
+    border-radius: 5px;
+  }
+
+  .bold-header {
+    text-align: center;
+  }
+
+  #placeInfoGroup {
+    width: 80%;
+  }
+
+  #favourites {
+    width: 60%;
+  }
+
+  #removeFaveBtn {
+    margin-bottom: 20px;
+  }
+
+  #placeInfoGroup  {
+    margin-bottom: 20px;
+  }
+
+  #addressInfo {
+    margin-bottom: 20px;
+  }
+
+  #favourites {
+    margin-top: 20px;
+  }
+
+  #faveBtn {
+    margin-bottom: 10px;
+  }
+
+  #timeForm, #showNotifications {
+    width: 80%;
+  }
+
+  #showNotifications {
+    padding-bottom: 0px;
+  }
+}
+
+@media (max-width: 600px) {
+  #placeInfoGroup, #favourites {
+    width: 80%;
+  }
+
+  #timeForm, #showNotifications {
+    width: 90%;
+  }
+
 }

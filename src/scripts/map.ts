@@ -1,7 +1,6 @@
 import * as L from "leaflet";
 import { Coordinates, PointOfInterest } from "../interfaces/Coordinates";
 
-let btnChoice: String;
 const map = L.map("map").setView([60.172659, 24.926596], 11);
 
 // Use the leaflet.js library to show the location on the map (https://leafletjs.com/)
@@ -10,62 +9,22 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(map);
 
+// Groups for map
 let layerGroup = L.layerGroup();
 const markerGroup = L.layerGroup();
 
+// Get the locations and show them on the map
 document.addEventListener("DOMContentLoaded", () => {
-  function success(pos: GeolocationPosition) {
-    const crd: Coordinates = pos.coords;
-    console.log(crd);
+  const API_URL = "https://www.hel.fi/palvelukarttaws/rest/v4/unit/";
 
-    map.setView([crd.latitude, crd.longitude], 13);
-
-    const ownLocation = addMarker(crd, "Olen tässä!");
-
-    getLocations(crd).then(function (pointsOfInterest) {
-      for (let i = 0; i < pointsOfInterest.length; i++) {
-        const placeName = pointsOfInterest[i].name_fi;
-        const coordinates = {
-          latitude: pointsOfInterest[i].latitude,
-          longitude: pointsOfInterest[i].longitude,
-        };
-        const marker = addMarker(coordinates, placeName);
-        //haetaan tiedot yhdestä pisteestä ja reitti sinne
-        marker.on("click", function () {
-          document.querySelector("#name")!.innerHTML =
-            pointsOfInterest[i].name_fi;
-          document.querySelector("#address")!.innerHTML =
-            pointsOfInterest[i].street_address_fi;
-          document.querySelector("#city")!.innerHTML =
-            pointsOfInterest[i].address_city_fi;
-        });
-      }
-      map.addLayer(markerGroup);
-      ownLocation.openPopup();
-    });
-
-    function getLocations(crd: Coordinates): Promise<PointOfInterest[]> {
-      console.log(crd);
-      const apiUrl =
-        "https://www.hel.fi/palvelukarttaws/rest/v4/unit/?ontologyword=317+318+319+320+321+322+323";
-
-      return fetch(apiUrl)
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`Failed to fetch data. Status: ${response.status}`);
-          }
-          return response.json();
-        })
-        .then((pointsOfInterest) => {
-          //console.log(pointsOfInterest);
-          return pointsOfInterest;
-        })
-        .catch((error) => {
-          console.error("Error fetching data:", error);
-          throw error;
-        });
-    }
-  }
+  const btnChoices: { [key: string]: string } = {
+    enclosure: "317",
+    trail: "318",
+    toilet: "319",
+    forest: "320",
+    beach: "321",
+    all: "317+318+319+320+321+322+323",
+  };
 
   const options: PositionOptions = {
     enableHighAccuracy: true,
@@ -73,46 +32,90 @@ document.addEventListener("DOMContentLoaded", () => {
     maximumAge: 0,
   };
 
-  function error(err: GeolocationPositionError) {
+  // Helper function to update map and markers
+  function updateMap(pos: GeolocationPosition, btnChoice: string) {
+    const crd = pos.coords;
+    //console.log(crd);
+    map.setView([crd.latitude, crd.longitude], 13);
+
+    const ownLocation = addMarker(crd, "Olen tässä!");
+    fetchLocations(API_URL, btnChoice).then((pointsOfInterest) => {
+      addMarkers(pointsOfInterest);
+      map.addLayer(markerGroup);
+      ownLocation.openPopup();
+    });
+  }
+
+  // Fetch locations from API
+  function fetchLocations(API_URL:string, btnChoice: string): Promise<PointOfInterest[]> {
+    const apiUrl = `${API_URL}?ontologyword=${btnChoice}`;
+
+    return fetch(apiUrl)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Failed to fetch data. Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+        throw error;
+      });
+  }
+
+  // Add markers to the map
+  function addMarkers(pointsOfInterest: PointOfInterest[]) {
+    pointsOfInterest.forEach((point) => {
+      const { name_fi: placeName, latitude, longitude, street_address_fi, address_city_fi } = point;
+      const marker = addMarker({ latitude, longitude }, placeName);
+
+      marker.on("click", () => {
+        updatePlaceDetails(placeName, street_address_fi, address_city_fi);
+      });
+    });
+  }
+
+  // Handle success for geolocation
+  function success(pos: GeolocationPosition) {
+    updateMap(pos, btnChoices.all);
+  }
+
+  // Handle success with different place choice
+  function successWithChoice(pos: GeolocationPosition, btnChoice: string) {
+    markerGroup.clearLayers();
+    layerGroup.clearLayers();
+    updateMap(pos, btnChoice);
+  }
+
+  // Geolocation error handler
+  function handleError(err: GeolocationPositionError) {
     console.warn(`ERROR(${err.code}): ${err.message}`);
   }
 
-  navigator.geolocation.getCurrentPosition(success, error, options);
+  // Handle place selection and trigger geolocation based on selection
+  function handlePlaceSelection() {
+    const radioButtons = document.querySelectorAll<HTMLInputElement>('input[name="place"]');
+    let selectedPlace = [...radioButtons].find((rb) => rb.checked)?.value;
+    console.log("Selected place:", selectedPlace);
+    const btnChoice = btnChoices[selectedPlace || "all"];
+    console.log("Button choice:", btnChoice);
 
-  const placeChoiceBtn = document.querySelector("#submitBtn");
-  const radioButtons = document.querySelectorAll<HTMLInputElement>(
-    'input[name="place"]'
-  );
-  placeChoiceBtn!.addEventListener("click", () => {
-    let selectedPlace;
-    for (const radioButton of radioButtons) {
-      if (radioButton.checked) {
-        selectedPlace = radioButton.value;
-        break;
-      }
-    }
-    if (selectedPlace === "enclosure") {
-      btnChoice = "317";
-      navigator.geolocation.getCurrentPosition(success2, error, options);
-    } else if (selectedPlace === "trail") {
-      btnChoice = "318";
-      navigator.geolocation.getCurrentPosition(success2, error, options);
-    } else if (selectedPlace === "toilet") {
-      btnChoice = "319";
-      navigator.geolocation.getCurrentPosition(success2, error, options);
-    } else if (selectedPlace === "forest") {
-      btnChoice = "320";
-      navigator.geolocation.getCurrentPosition(success2, error, options);
-    } else if (selectedPlace === "beach") {
-      btnChoice = "321";
-      navigator.geolocation.getCurrentPosition(success2, error, options);
-    } else {
-      btnChoice = "317+318+319+320+321+322+323";
-      navigator.geolocation.getCurrentPosition(success2, error, options);
-    }
-  });
+    // Trigger geolocation with the selected button choice
+    navigator.geolocation.getCurrentPosition(
+      (pos) => successWithChoice(pos, btnChoice),
+      handleError,
+      options
+    );
+  }
+
+  // Add event listener to the submit button
+  document.querySelector("#submitBtn")!.addEventListener("click", handlePlaceSelection);
+
+  // Initialize geolocation on page load
+  navigator.geolocation.getCurrentPosition(success, handleError, options);
 });
 
+// Add a marker to the map
 function addMarker(crd: Coordinates, text: string): L.Marker {
   const customIcon = L.icon({
     iconUrl: "/images/target50.png",
@@ -128,48 +131,10 @@ function addMarker(crd: Coordinates, text: string): L.Marker {
   return m;
 }
 
-function updateLocations(btnChoice: String) {
-  const url = `https://www.hel.fi/palvelukarttaws/rest/v4/unit/?ontologyword=${btnChoice}`;
-  return fetch(url)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (pointsOfInterest) {
-      console.log(pointsOfInterest);
-      return pointsOfInterest;
-    });
+// Update UI elements with selected place details
+function updatePlaceDetails(name: string, address: string, city: string) {
+  document.querySelector("#name")!.innerHTML = name;
+  document.querySelector("#address")!.innerHTML = address;
+  document.querySelector("#city")!.innerHTML = city;
 }
 
-function success2(pos: GeolocationPosition) {
-  markerGroup.clearLayers();
-  layerGroup.clearLayers();
-  const crd = pos.coords;
-  console.log(crd);
-
-  map.setView([crd.latitude, crd.longitude], 11);
-
-  //lisätään oman sijainnin marker
-  const ownLocation = addMarker(crd, "Olen tässä!");
-  ownLocation.openPopup();
-
-  //lisätään markerit kohdepaikoille
-  updateLocations(btnChoice).then(function (pointsOfInterest) {
-    for (let i = 0; i < pointsOfInterest.length; i++) {
-      const placeName = pointsOfInterest[i].name_fi;
-      const coordinates = {
-        latitude: pointsOfInterest[i].latitude,
-        longitude: pointsOfInterest[i].longitude,
-      };
-      const marker = addMarker(coordinates, placeName);
-      //haetaan tiedot yhdestä pisteestä ja reitti sinne
-      marker.on("click", function () {
-        document.querySelector("#name")!.innerHTML =
-          pointsOfInterest[i].name_fi;
-        document.querySelector("#address")!.innerHTML =
-          pointsOfInterest[i].street_address_fi;
-        document.querySelector("#city")!.innerHTML =
-          pointsOfInterest[i].address_city_fi;
-      });
-    }
-  });
-}

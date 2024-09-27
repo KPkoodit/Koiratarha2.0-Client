@@ -1,8 +1,11 @@
-const logoutBtn = document.querySelector("#navContentPageLogout");
+const logoutBtns = document.querySelectorAll(".logout");
 
-logoutBtn!.addEventListener("click", async ()=> {
+logoutBtns!.forEach(button => {
+  button.addEventListener("click", async () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userId");
+    window.location.href = "/";
+  });
 });
 
 export {};

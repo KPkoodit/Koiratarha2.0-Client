@@ -14,7 +14,7 @@ const registerButton = document.querySelector(
 registerButton.addEventListener("click", async (e) => {
   e.preventDefault();
 
-  const registerForm = document.querySelector("#userContent") as HTMLFormElement;
+  const registerForm = document.querySelector("#userForm") as HTMLFormElement;
   const username = registerForm.querySelector("#username") as HTMLInputElement;
   const password = registerForm.querySelector("#password") as HTMLInputElement;
   const nameInput = username.value;

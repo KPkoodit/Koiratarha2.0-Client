@@ -11,7 +11,7 @@ const loginButton = document.querySelector(
 
 // login handling
 loginButton.addEventListener("click", async () => {
-  const loginForm = document.querySelector("#userContent") as HTMLFormElement;
+  const loginForm = document.querySelector("#userForm") as HTMLFormElement;
 
   loginForm.addEventListener("submit", async (e) => {
     e.preventDefault();
