@@ -1,7 +1,7 @@
 import * as L from "leaflet";
 import { Coordinates, PointOfInterest } from "../interfaces/Coordinates";
 
-const map = L.map("map").setView([60.172659, 24.926596], 11);
+const map = L.map("map").setView([0, 0], 2);
 
 // Use the leaflet.js library to show the location on the map (https://leafletjs.com/)
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function updateMap(pos: GeolocationPosition, btnChoice: string) {
     const crd = pos.coords;
     //console.log(crd);
-    map.setView([crd.latitude, crd.longitude], 13);
+    map.setView([crd.latitude, crd.longitude], 12);
 
     const ownLocation = addMarker(crd, "Olen tässä!");
     fetchLocations(API_URL, btnChoice).then((pointsOfInterest) => {
@@ -47,20 +47,19 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Fetch locations from API
-  function fetchLocations(API_URL:string, btnChoice: string): Promise<PointOfInterest[]> {
+  async function fetchLocations(API_URL:string, btnChoice: string): Promise<PointOfInterest[]> {
     const apiUrl = `${API_URL}?ontologyword=${btnChoice}`;
 
-    return fetch(apiUrl)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`Failed to fetch data. Status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-        throw error;
-      });
+    try {
+      const response = await fetch(apiUrl);
+      if (!response.ok) {
+        throw new Error(`Failed to fetch data. Status: ${response.status}`);
+      }
+      return await response.json();
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      throw error;
+    }
   }
 
   // Add markers to the map
@@ -108,14 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   }
 
-  // Add event listener to the submit button
-  document.querySelector("#submitBtn")!.addEventListener("click", handlePlaceSelection);
-
-  // Initialize geolocation on page load
-  navigator.geolocation.getCurrentPosition(success, handleError, options);
-});
-
-// Add a marker to the map
+  // Add a marker to the map
 function addMarker(crd: Coordinates, text: string): L.Marker {
   const customIcon = L.icon({
     iconUrl: "/images/target50.png",
@@ -137,4 +129,11 @@ function updatePlaceDetails(name: string, address: string, city: string) {
   document.querySelector("#address")!.innerHTML = address;
   document.querySelector("#city")!.innerHTML = city;
 }
+
+  // Add event listener to the submit button
+  document.querySelector("#submitBtn")!.addEventListener("click", handlePlaceSelection);
+
+  // Initialize geolocation on page load
+  navigator.geolocation.getCurrentPosition(success, handleError, options);
+});
 
