@@ -9,9 +9,12 @@ The app uses a client (Vite), GraphQL API server, REST API AUTH server and a NoS
 ## Used technologies:
 - TypeScript
 - Vite
+- Leaflet.js
+- OpenStreetMap
+- GraphQL
 - HTML
 - CSS
-- GraphQL
+
 
 ## Get started:
 
