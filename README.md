@@ -6,6 +6,18 @@ Koiratarha 2.0 is a web application that uses the MyHelsinki Open API to show va
 
 The app uses a client (Vite), GraphQL API server, REST API AUTH server and a NoSQL database. Artwork created by MinaSofi.
 
+## Team
+
+- MinaSofi
+- Sebaswo
+- KPkoodit
+
+#### My Responsibilities
+
+During the course, I primarily focused on backend development. This involved implementing functions and tests for the user class, adding user account modification features, and modifying most of the CRUD functions of the authentication server to meet the project's needs.
+
+After the course ended, I made further improvements to the frontend.
+
 ## Used technologies:
 - TypeScript
 - Vite
@@ -14,7 +26,6 @@ The app uses a client (Vite), GraphQL API server, REST API AUTH server and a NoS
 - GraphQL
 - HTML
 - CSS
-
 
 ## Get started:
 
